@@ -6,18 +6,21 @@ def hipparcos_search(hip_number):
 
     with load.open(hipparcos.URL) as f:
         df = hipparcos.load_dataframe(f)
-
+    
     star = Star.from_dataframe(df.loc[hip_number])
+    print(f"this is the star: {type(star)}")
     ra, dec = observe(star)
     return ra, dec
 
 
-def observe(target):
+def observe(target):#can parse planet name directly into observe
 
     planets = load('de421.bsp')
     earth = planets['earth']
+    print(type(target))
 
-    if target in planets:
+#fix to only include planets
+    if type(target) != Star:#if object parsed is a planet
         target = planets[str(target)]
 
     ts = load.timescale()
@@ -26,6 +29,6 @@ def observe(target):
     ra, dec, distance = astrometric.radec('date')
     return ra, dec
 
-if __name__ == "__main__":
-    #print(hipparcos_search(87937))
-    print(observe("mars"))
+if __name__ == "__main__": #testing
+    print(hipparcos_search(87937))
+    #print(observe("mars"))
