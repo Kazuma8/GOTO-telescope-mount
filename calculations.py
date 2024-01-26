@@ -1,9 +1,16 @@
 from skyfield.api import Star, load, Loader
 from skyfield.data import hipparcos
+from astroquery.simbad import Simbad
+
 from contextlib import closing
 import datetime
 
 load = Loader(r'./data')
+
+def simad_search(catalogue, number):
+    
+    
+
 
 def hipparcos_search(hip_number):
 
